@@ -1,0 +1,169 @@
+/*	
+jquery.clrtext.css
+    Styling for ClrText editor
+
+Version History:
+    Vimal Kurup, 2013.11.10: created
+    Vimal Kurup, 2013.11.10: block styling
+    Vimal Kurup, 2013.12.01: more styling
+    Vimal Kurup, 2013.12.15: fixes
+*/
+
+#mainContainer{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: .9em;
+	margin: 0 auto;
+	position: relative;
+}
+
+.blockOptions{
+	text-align: right;
+	padding: 4px;
+}
+
+.blockOptions div{
+	margin-right: 10px;
+}
+
+#text, #code, #image, #list{
+	float: right;
+	margin-right: 10px;
+	height: 40px;
+	background-position: center top;	
+	padding-top: 26px;
+	cursor: pointer;
+}
+#text{
+	background: transparent url("img/text.png") no-repeat 0 0;
+}
+#text:hover{
+	background: transparent url("img/text1.png") no-repeat 0 0;
+}
+#code{
+	background: transparent url("img/code.png") no-repeat 0 0;
+}
+#code:hover{
+	background: transparent url("img/code1.png") no-repeat 0 0;
+}
+#image{
+	background: transparent url("img/image.png") no-repeat 0 0;
+}
+#image:hover{
+	background: transparent url("img/image1.png") no-repeat 0 0;
+}
+#list{
+	background: transparent url("img/list.png") no-repeat 0 0;
+}
+#list:hover{
+	background: transparent url("img/list1.png") no-repeat 0 0;
+}
+
+
+.titleDiv{
+	border-width: 0px 0px 1px 0px;
+	border-color: #CCC;
+	padding: 12px;
+	width: 100%;
+}
+#blocks-container{
+	margin-top: 20px;
+}
+.content-block{
+	border: 2px solid #FFF;
+	padding: 2em;
+	position: relative;
+}
+
+.content-block:hover{
+	border: 2px solid #00AFF0;
+
+}
+
+.inner-block{
+	padding: 12px;
+	text-align: left;
+}
+ul.inner-block{
+	list-style-position:inside;
+}
+
+.delete-block, .handle{
+	position: absolute;
+	top: .2em;
+	height: 24px;
+	width: 24px;
+	text-indent: -9999px;
+}
+
+.delete-block{
+	background-image: url("img/delete.png");
+	right: .2em;
+	cursor: pointer;
+}
+.handle{
+	right: 26px;
+	cursor: move;
+	background-image: url("img/move.png");
+}
+
+.delete-block:hover{
+	background-image: url("img/delete1.png");
+}
+.handle:hover{
+	background-image: url("img/move1.png");
+}
+
+/*div:focus, ul:focus, pre:focus, input:focus { 
+	outline: none; 
+}​*/
+
+.modifyTextModel {
+	padding: 6px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	color: #FFF;
+	border-radius: 4px;
+}
+
+.modifyTextModel span{
+	margin: 0 6px;
+	cursor: pointer;
+}
+
+#emailResponse, .returnedMessage{
+    text-align: left;
+    background-color: #F9E238;
+    padding: 6px;
+    border: 1px solid #F9BC38;
+    border-radius: 4px;
+    font-size: 1.1em;
+}
+
+.addButtonContainer{
+	text-align: center;
+}
+.addButtonContainer>span{
+	background: transparent url('img/page_add.png') no-repeat center;
+	display: block;
+	text-align: center;
+}
+.addContentButtonContainer a{
+	margin: 12px;
+	padding: 6px;
+	cursor: pointer;
+}
+
+.addContentButtonContainer a:hover{
+	color: green;
+}
+
+.textContainer, .listContainer{
+	padding: 10px;
+	border: 2px solid #FFF;
+}
+
+.textContainer:hover{
+	border: 2px solid #ccc;
+}

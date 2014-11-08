@@ -1,0 +1,17 @@
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
+.navbar-brand{
+	background: url("img/text.png") no-repeat center left;
+	padding-left: 28px;
+}
+
+.navbar-brand:hover{
+	background: url("img/text1.png") no-repeat center left;
+	color: #00AFF0 !important;
+}

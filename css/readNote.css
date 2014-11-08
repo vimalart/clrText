@@ -1,0 +1,82 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 23, 2013, 10:41:42 PM
+    Author     : Rajkaran
+*/
+
+html, body, div, span, p, input, button{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.header{
+   
+}
+
+.appLogo{
+    width:auto;
+    height:auto;
+    position: relative;
+}
+
+.appLogo img{
+    width:10%;
+    height:auto;
+}
+
+.appLogo span{
+    display: inline-block;
+    font-family: monospace;
+    font-size: 4em;
+    position:relative;
+    left: 20px;
+    top: -.6em;
+}
+
+.emailBlock{
+    position: absolute;
+    top:4em;
+    right:1%;
+}
+
+.emailBlock input[type="text"]{
+    width: 18em;
+    height: 1.6em;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+}
+
+.emailBlock input[type="button"]{
+    font-size: 1.5em;
+    height: 1.3em;
+    padding: 0 10px;
+}
+
+.content{
+    margin:2%; 
+}
+
+#emailResponse{
+    color:firebrick;
+    font-size: 1.5em;
+}
+
+#emailResponse span{
+    color:darkgreen;
+}
+
+.content .note{
+    border:1px solid #ccc;
+}
+
+
+.footer{
+    text-align: center;
+}
+
+
