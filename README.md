@@ -21,5 +21,6 @@ How to use ?
 + Include the 'jquery.clrtext.js' file
 + Initialize the library by call the method clrtext() on a html container element.
 
-e.g.
+Example:  
+
     $('#mainContainer').clrtext();
