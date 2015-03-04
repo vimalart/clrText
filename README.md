@@ -1,8 +1,8 @@
 clrText
 =======
 
-clrText is a jQuery plugin for rich text editing and is inspired by “sir-trevor-js” library. The library is in the proof of concept phase and not ready for real world use.
-The library provides blocks of different type for content manipulation.
+clrText is a jQuery plugin for rich text editing using different types of content blocks. The library is in the proof of concept phase and not ready for real world use.
+
 
 Features
 --------
@@ -15,3 +15,11 @@ Features
 Working
 -------
 ![alt tag](http://i.imgur.com/R5k2zqo.gif)
+
+How to use ?
+------------
++ Include the 'jquery.clrtext.js' file
++ Initialize the library by call the method clrtext() on a html container element.
+
+e.g.
+    $('#mainContainer').clrtext();
