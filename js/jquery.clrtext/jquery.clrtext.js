@@ -1,7 +1,7 @@
-/*	
+/*
  * jquery.clrtext.js
  *	ClrText is a rich inline block editor created by extending jQuery
-	
+
  * Version History:
  *      Vimal Kurup, 2013.11.10: created
  *      Vimal Kurup, 2013.11.10: Added block feature
@@ -21,7 +21,7 @@
         function ClrText(element, options){
 		var widget = this;
                 this.dots;
-                
+
                 //combine default settings with user provided settings
 		widget.config = $.extend({}, defaults, options);
 
@@ -35,52 +35,58 @@
 		    timer = setTimeout(callback, ms);
 		  };
 		})();
-                
-                //when no activity for 4 seconds save the document
+
+    //when no activity for 4 seconds save the document
 		widget.element.on("keyup", function(){
 		    delay(function(){
-                        widget.startAnim( $(".returnedMessage") );
-                        
-                        var ele = "";				
-                        $('.content-block').each(function(index, element) {
-                            clonedElement = $(element).clone();
-                            $(clonedElement).find('.handle, .delete-block').remove();
-                            $(clonedElement).children(".inner-block").removeAttr("contenteditable");
-                            ele += "<div class=\"content-block\">"+$(clonedElement).html()+"</div>";
-                        });
-                        $("textarea#content").val(ele);
-                        
-                        widget.save(widget);
-                        
+	        //widget.startAnim( $(".returnedMessage") );
+
+					var content = [];
+	        $('.content-block').each(function(index, element) {
+	            //clonedElement = $(element).clone();
+	            //$(clonedElement).find('.handle, .delete-block').remove();
+	            //$(clonedElement).children(".inner-block").removeAttr("contenteditable");
+	            //ele += $(element).find('.inner-block').html();
+							var block = {};
+							var ele = $(element).find('.inner-block');
+							block.type = ele.data("set");
+							block.content = ele.html();
+							content.push(block);
+	        });
+	        //$("textarea#content").val(ele);
+
+	        //widget.save(widget);
+					console.log(content);
+
 		    }, 4000 );
 		});
-                
-                //using jQuery UI sortable to make blocks sortable
+
+    //using jQuery UI sortable to make blocks sortable
 		$( "#mainContainer" ).sortable({ handle: ".handle" });
-                
+
                 //when text is selected, show options to modify text (bold, italics, link, unlink)
 		element.on("mouseup", ".inner-block", function(e){
 			var selObj = window.getSelection();
 			var selString = selObj.toString();
 			if( selString != ""){
 				$(".modifyTextModel").show().css({left: e.clientX - 50, top: e.clientY - 50});
-			}			
+			}
 		});
-                
+
                 //make selected text bold
 		$(document.body).on("mousedown", "#bold", function(){
 				$(".modifyTextModel").hide();
 				document.execCommand('bold', false, null);
 				console.log("here");
 		});
-                
+
                 //make selected text italic
 		$(document.body).on("mousedown", "#italics", function(){
 			$(".modifyTextModel").hide();
 			document.execCommand('italic', false, null);
 			console.log("here");
 		});
-                
+
                 //insert url
 		$(document.body).on("mousedown", "#link", function(){
 			$(".modifyTextModel").hide();
@@ -88,9 +94,9 @@
 
 			if (link != null)
 				document.execCommand('createLink', false, link);
-			
+
 		});
-                
+
                 //remove hyper link
 		$(document.body).on("mousedown", "#unlink", function(){
 			$(".modifyTextModel").hide();
@@ -99,35 +105,35 @@
 
 		widget.init();
 	}
-        
+
         //save function
         ClrText.prototype.save = function(widget){
-            
+
             if( $("#noteId").val() === "" ){
-                widget.create( $(".titleDiv").val(), 
-                        $("#content").val(), widget 
+                widget.create( $(".titleDiv").val(),
+                        $("#content").val(), widget
                 );
             }
-            else{ 
-                widget.update( $("#noteId").val(), 
-                        $(".titleDiv").val(), 
-                        $("#content").val(), widget 
+            else{
+                widget.update( $("#noteId").val(),
+                        $(".titleDiv").val(),
+                        $("#content").val(), widget
                 );
             }
         };
-        
+
         //create new function
         ClrText.prototype.create = function(title, content, widget){
             if( title !== "", content !== "" ){
                 $.post('createNote',{title:title, content:content},
                     function(responseText) {
                         var jsonObj = JSON.parse(responseText);
-                        if(jsonObj.response === "true"){                           
+                        if(jsonObj.response === "true"){
                            widget.stopAnim( $(".returnedMessage") );
                            $(".returnedMessage").html("<span>All changes Saved</span>");
                            $(".returnedMessage").show();
                            $("#noteId").val(jsonObj.id);
-                        }else{ 
+                        }else{
                             $(".returnedMessage").html(jsonObj.errorMessage);
                             $(".returnedMessage").show();
                         }
@@ -135,12 +141,12 @@
                 );
             }
         };
-        
+
         //update function
         ClrText.prototype.update = function(id, title, content, widget){
             $.post('createNote',{id:id, title:title, content:content},
                 function(responseText) {
-                    var jsonObj = JSON.parse(responseText);                        
+                    var jsonObj = JSON.parse(responseText);
                     if(jsonObj.response === "true"){
                        widget.stopAnim( $(".returnedMessage") );
                        $(".returnedMessage").html("<span>All changes Saved</span>");
@@ -148,21 +154,21 @@
                     }else {
                         $(".returnedMessage").html(jsonObj.errorMessage);
                         $(".returnedMessage").show();
-                    }                                
+                    }
                 }
             );
         };
-        
+
         //This function starts the indexing animation
-	ClrText.prototype.startAnim = function(element){
-		element.html("<p>Saving <span id='wait'></span></p>");
-		this.dots = window.setInterval( function() {
-			var wait = element.children("p").children("span");
-			if ( wait.html().length > 8 ) wait.html("");
-			else wait.html(wait.html()+".");
-		}, 340);
-	};
-	
+	// ClrText.prototype.startAnim = function(element){
+	// 	element.html("<p>Saving <span id='wait'></span></p>");
+	// 	this.dots = window.setInterval( function() {
+	// 		var wait = element.children("p").children("span");
+	// 		if ( wait.html().length > 8 ) wait.html("");
+	// 		else wait.html(wait.html()+".");
+	// 	}, 340);
+	// };
+
 	//this function stops the animation
 	ClrText.prototype.stopAnim = function(element){
 		clearInterval(this.dots);
@@ -170,45 +176,45 @@
 	};
 
 	/*init function
-        this part of the plugin takes care of creating elements on the page*/	
+        this part of the plugin takes care of creating elements on the page*/
 	ClrText.prototype.init = function(){
 		var element = this.element;
-                
+
                 //button to create blocks
 		var blockOptions = $("<div/>,", {
 			"class": "blockOptions group"
 		}).appendTo(element);
-		
+
                 //text block button
 		var textBlockOption = $("<div/>", {
 			text: "Text",
 			id: "text"
 		}).appendTo(blockOptions);
-                
+
                 //image block button
 		var imageBlockOption = $("<div/>", {
 			text: "Image",
 			id: "image"
 		}).appendTo(blockOptions);
-		
+
                 //code block button
 		var codeBlockOption = $("<div/>", {
 			text: "Code",
 			id: "code"
 		}).appendTo(blockOptions);
-		
+
                 //list block button
 		var listBlockOption = $("<div/>", {
 			text: "List",
 			id: "list"
-		}).appendTo(blockOptions);                
-                
+		}).appendTo(blockOptions);
+
 		$("<div/>", {
 			"style": "clear: both"
 		}).appendTo(blockOptions);
 
 		var form = $("<form />").appendTo(element);
-		
+
                 //document title element
 		var contentTitle = $("<input/>", {
 			type: "text",
@@ -222,17 +228,17 @@
 			name: "content",
 			id: "content",
 			hidden: true
-		}).appendTo(form);                
-                
+		}).appendTo(form);
+
 		var blocksContainer = $("<div/>", {
 			text: "Click on the content type button on the top right to a create a content block and start typing !!!",
 			id: "blocks-container"
-		}).appendTo(element);		
+		}).appendTo(element);
 
 		$('.blockOptions').one("click", function(){
-			blocksContainer.text("");
+			blocksContainer.hide();
 		})
-                
+
                 //text block
 		textBlockOption.on("click", function(e){
 			var contentDiv = $("<div/>", {
@@ -262,7 +268,7 @@
 				contentEditable: true
 			}).appendTo(contentDiv).focus();
 		});
-                
+
                 //code block
 		codeBlockOption.on("click", function(e){
 			var contentDiv = $("<div/>", {
@@ -317,16 +323,16 @@
 			}).appendTo(contentDiv);
 
 			contentDiv.appendTo(element);
-			
+
 			var list = $("<ul/>", {
 				"class": "inner-block",
 				"data-set": "list",
 				contentEditable: true
 			}).appendTo(contentDiv);
-			
+
 			$("<li><br /></li>").focus().appendTo(list);
 		});
-                
+
                 //image block
 		imageBlockOption.on("click", function(e){
 
@@ -360,7 +366,7 @@
 				"src": imageLink
 			}).appendTo(contentDiv).focus();
 			}
-			
+
 		});
 
                 //rich text options
@@ -388,7 +394,7 @@
 			text: "NL",
 			id: "unlink"
 		}).appendTo(modifyTextModel);
-                
+
                 //code highliter
 		element.one("focus", ".prettyprint", function(e){
 			$(this).text(" ");
@@ -397,7 +403,7 @@
 		element.on("focusout", ".prettyprint", function(e){
 			prettyPrint();
 		});
-                
+
                 //show hide delete and move icons
 		element.on("mouseover", ".content-block", function(e){
 			$this = $(this);
@@ -416,7 +422,7 @@
 			$(this).parent(".content-block").remove();
 		});
 	}
-        
+
         //extending jQuery
 	$.fn.clrtext = function(options){
 		new ClrText(this.first(), options);
