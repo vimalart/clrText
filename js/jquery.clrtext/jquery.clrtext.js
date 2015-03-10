@@ -56,7 +56,8 @@
 	        //$("textarea#content").val(ele);
 
 	        //widget.save(widget);
-					console.log(content);
+					var jContent = JSON.stringify(content);
+					console.log(jContent);
 
 		    }, 4000 );
 		});
@@ -77,14 +78,12 @@
 		$(document.body).on("mousedown", "#bold", function(){
 				$(".modifyTextModel").hide();
 				document.execCommand('bold', false, null);
-				console.log("here");
 		});
 
                 //make selected text italic
 		$(document.body).on("mousedown", "#italics", function(){
 			$(".modifyTextModel").hide();
 			document.execCommand('italic', false, null);
-			console.log("here");
 		});
 
                 //insert url
